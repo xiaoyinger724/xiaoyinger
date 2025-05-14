@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>欢迎来到我的博客 | 小颖儿的音乐世界</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0e0e10;
+      color: #e5e5e5;
+      overflow-x: hidden;
+    }
+    header {
+      background-color: #1a1a1d;
+      padding: 2rem;
+      text-align: center;
+      border-bottom: 1px solid #2b2b2e;
+      opacity: 0;
+      animation: fadeIn 2s forwards 0.5s;
+    }
+    header h1 {
+      margin: 0;
+      color: #00fff2;
+      opacity: 0;
+      animation: fadeIn 2s forwards 1s;
+    }
+    header nav {
+      margin-top: 1rem;
+      opacity: 0;
+      animation: fadeIn 2s forwards 1.5s;
+    }
+    header nav a {
+      margin: 0 1rem;
+      color: #00fff2;
+      text-decoration: none;
+      font-weight: 600;
+      opacity: 0;
+      animation: slideIn 1s forwards 2s;
+    }
+    header nav a:hover {
+      color: #ffffff;
+      transform: scale(1.1);
+      transition: transform 0.3s ease-in-out;
+    }
+    header nav a:nth-child(2) {
+      animation-delay: 2.2s;
+    }
+    header nav a:nth-child(3) {
+      animation-delay: 2.4s;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 2s forwards 2.5s;
+    }
+    main h2 {
+      opacity: 0;
+      animation: fadeIn 2s forwards 3.5s;
+    }
+    main p {
+      opacity: 0;
+      animation: fadeIn 2s forwards 4s;
+    }
+    main button {
+      background-color: #00fff2;
+      padding: 1rem 2rem;
+      border: none;
+      color: #1a1a1d;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      opacity: 0;
+      animation: fadeIn 2s forwards 4.5s;
+    }
+    main button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @media (max-width: 600px) {
+      header nav {
+        display: block;
+      }
+      header nav a {
+        margin-bottom: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>欢迎来到小颖儿的音乐世界</h1>
+    <nav>
+      <a href="index.html">主页</a>
+      <a href="music.html">音乐作品</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>欢迎来到小颖儿的原创音乐博客</h2>
+    <p>在这里，我会发布自己创作的音乐，带你一起感受旋律中的情感和故事。</p>
+    <p>点击下面的按钮，聆听我创作的音乐作品！</p>
+    <a href="music.html">
+      <button>去听我的音乐</button>
+    </a>
+  </main>
+
+  <footer>
+    © 2025 小颖儿 · 原创音乐博客
+  </footer>
+</body>
+</html>
