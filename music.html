@@ -11,6 +11,7 @@
       font-family: 'Inter', sans-serif;
       background-color: #0e0e10;
       color: #e5e5e5;
+      padding-bottom: 100px; /* 为底部播放器留出空间 */
     }
     header {
       background-color: #1a1a1d;
@@ -33,26 +34,24 @@
     .music-entry {
       background: #1c1c1f;
       padding: 1.5rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 240, 255, 0.1);
       transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
     }
     .music-entry:hover {
       transform: translateY(-4px);
       box-shadow: 0 6px 20px rgba(0, 240, 255, 0.2);
+      background: #242428;
     }
     .music-entry h2 {
       margin-top: 0;
       color: #00fff2;
+      font-size: 1.2rem;
     }
     .music-entry p {
-      margin-bottom: 1rem;
+      margin-bottom: 0;
       color: #ccc;
-    }
-    audio {
-      width: 100%;
-      outline: none;
     }
     footer {
       text-align: center;
@@ -60,9 +59,64 @@
       color: #666;
       font-size: 0.9rem;
     }
+    
+    /* 底部播放器样式 */
+    .player-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #1a1a1d;
+      border-top: 1px solid #2b2b2e;
+      padding: 1rem;
+      z-index: 100;
+    }
+    .player {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .player-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .player-info h3 {
+      margin: 0;
+      color: #00fff2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .player-info p {
+      margin: 0.2rem 0 0;
+      color: #888;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    audio {
+      flex: 2;
+      min-width: 0;
+      outline: none;
+    }
+    .music-list {
+      max-height: calc(100vh - 300px);
+      overflow-y: auto;
+    }
+    
     @media (max-width: 600px) {
       .music-entry {
         padding: 1rem;
+      }
+      .player {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      audio {
+        width: 100%;
       }
     }
   </style>
@@ -70,358 +124,243 @@
 <body>
   <header>
     <h1>🎧 小颖儿的音乐作品</h1>
-    <p>在这里你可以聆听我创作的音乐</p>
+    <p>点击歌曲名称开始播放</p>
   </header>
 
   <main>
-    <!-- Music Entries -->
-    <div class="music-entry">
-  <h2>小颖儿 - 9420</h2>
-  <audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 9420.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+    <div class="music-list">
+      <!-- Music Entries -->
+      <div class="music-entry" data-src="music/小颖儿 - 9420.mp3">
+        <h2>小颖儿 - 9420</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - Heart of Rain</h2>
-  <audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - Heart of Rain.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - Heart of Rain.mp3">
+        <h2>小颖儿 - Heart of Rain</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - Love Stroy</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - Love Stroy.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - Love Stroy.mp3">
+        <h2>小颖儿 - Love Stroy</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 爱情码头</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 爱情码头.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 爱情码头.mp3">
+        <h2>小颖儿 - 爱情码头</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 卑微到最后有多痛</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 卑微到最后有多痛.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 卑微到最后有多痛.mp3">
+        <h2>小颖儿 - 卑微到最后有多痛</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 壁上观</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 壁上观.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 壁上观.mp3">
+        <h2>小颖儿 - 壁上观</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 别丢下我不管</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 别丢下我不管.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 别丢下我不管.mp3">
+        <h2>小颖儿 - 别丢下我不管</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 卜卦</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 卜卦.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 卜卦.mp3">
+        <h2>小颖儿 - 卜卦</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 赤伶</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 赤伶.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 赤伶.mp3">
+        <h2>小颖儿 - 赤伶</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 大鱼</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 大鱼.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 大鱼.mp3">
+        <h2>小颖儿 - 大鱼</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 父亲写的散文诗 完整</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 父亲写的散文诗 完整.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 父亲写的散文诗 完整.mp3">
+        <h2>小颖儿 - 父亲写的散文诗 完整</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 父亲写的散文诗</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 父亲写的散文诗.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 父亲写的散文诗.mp3">
+        <h2>小颖儿 - 父亲写的散文诗</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 好可惜</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 好可惜.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 好可惜.mp3">
+        <h2>小颖儿 - 好可惜</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 喝到吐聊到哭</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 喝到吐聊到哭.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 喝到吐聊到哭.mp3">
+        <h2>小颖儿 - 喝到吐聊到哭</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 红颜旧</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 红颜旧.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 红颜旧.mp3">
+        <h2>小颖儿 - 红颜旧</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 后来（安版）</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 后来（安版）.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 后来（安版）.mp3">
+        <h2>小颖儿 - 后来（安版）</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 后来</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 后来.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 后来.mp3">
+        <h2>小颖儿 - 后来</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 画心</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 画心.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 画心.mp3">
+        <h2>小颖儿 - 画心</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 记事本</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 记事本.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 记事本.mp3">
+        <h2>小颖儿 - 记事本</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 泪水的痕迹</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 泪水的痕迹.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 泪水的痕迹.mp3">
+        <h2>小颖儿 - 泪水的痕迹</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 恋人心</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 恋人心.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 恋人心.mp3">
+        <h2>小颖儿 - 恋人心</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 满目星辰不及你</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 满目星辰不及你.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 满目星辰不及你.mp3">
+        <h2>小颖儿 - 满目星辰不及你</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 孟婆的碗</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 孟婆的碗.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 孟婆的碗.mp3">
+        <h2>小颖儿 - 孟婆的碗</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 莫望</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 莫望.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 莫望.mp3">
+        <h2>小颖儿 - 莫望</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 诺</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 诺.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 诺.mp3">
+        <h2>小颖儿 - 诺</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 泡沫</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 泡沫.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 泡沫.mp3">
+        <h2>小颖儿 - 泡沫</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 谁</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 谁.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 谁.mp3">
+        <h2>小颖儿 - 谁</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 失落</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 失落.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 失落.mp3">
+        <h2>小颖儿 - 失落</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 问</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 问.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 问.mp3">
+        <h2>小颖儿 - 问</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 我很快乐</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 我很快乐.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 我很快乐.mp3">
+        <h2>小颖儿 - 我很快乐</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 我嘞家</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 我嘞家.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 我嘞家.mp3">
+        <h2>小颖儿 - 我嘞家</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 我们都是好孩子</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 我们都是好孩子.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 我们都是好孩子.mp3">
+        <h2>小颖儿 - 我们都是好孩子</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 小幸运</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 小幸运.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 小幸运.mp3">
+        <h2>小颖儿 - 小幸运</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 星月神话</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 星月神话.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 星月神话.mp3">
+        <h2>小颖儿 - 星月神话</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 烟火里的尘埃</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 烟火里的尘埃.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 烟火里的尘埃.mp3">
+        <h2>小颖儿 - 烟火里的尘埃</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 一次就好</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 一次就好.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 一次就好.mp3">
+        <h2>小颖儿 - 一次就好</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 以后的以后</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 以后的以后.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 以后的以后.mp3">
+        <h2>小颖儿 - 以后的以后</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 因为你爱上他</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 因为你爱上他.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 因为你爱上他.mp3">
+        <h2>小颖儿 - 因为你爱上他</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 月半小夜曲</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 月半小夜曲.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 月半小夜曲.mp3">
+        <h2>小颖儿 - 月半小夜曲</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 月光掩埋了思念</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 月光掩埋了思念.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 月光掩埋了思念.mp3">
+        <h2>小颖儿 - 月光掩埋了思念</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 越爱越难过</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 越爱越难过.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 越爱越难过.mp3">
+        <h2>小颖儿 - 越爱越难过</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 越长大越孤单</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 越长大越孤单.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 越长大越孤单.mp3">
+        <h2>小颖儿 - 越长大越孤单</h2>
+      </div>
 
-<div class="music-entry">
-  <h2>小颖儿 - 追光者</h2>
-<audio controls controlsList="nodownload" oncontextmenu="return false;">
-    <source src="music/小颖儿 - 追光者.mp3" type="audio/wav">
-    您的浏览器不支持音频播放。
-  </audio>
-</div>
+      <div class="music-entry" data-src="music/小颖儿 - 追光者.mp3">
+        <h2>小颖儿 - 追光者</h2>
+      </div>
+    </div>
   </main>
+
+  <!-- 底部播放器 -->
+  <div class="player-container">
+    <div class="player">
+      <div class="player-info">
+        <h3 id="now-playing-title">选择一首歌曲开始播放</h3>
+        <p id="now-playing-subtitle">小颖儿的音乐作品</p>
+      </div>
+      <audio id="audio-player" controls controlsList="nodownload" oncontextmenu="return false;"></audio>
+    </div>
+  </div>
 
   <footer>
     © 2025 小颖儿 · 原创音乐博客
   </footer>
+
+  <script>
+    // 获取所有音乐条目
+    const musicEntries = document.querySelectorAll('.music-entry');
+    const audioPlayer = document.getElementById('audio-player');
+    const nowPlayingTitle = document.getElementById('now-playing-title');
+    const nowPlayingSubtitle = document.getElementById('now-playing-subtitle');
+    
+    // 为每个音乐条目添加点击事件
+    musicEntries.forEach(entry => {
+      entry.addEventListener('click', function() {
+        const songSrc = this.getAttribute('data-src');
+        const songTitle = this.querySelector('h2').textContent;
+        
+        // 设置音频源
+        audioPlayer.src = songSrc;
+        
+        // 更新当前播放信息
+        nowPlayingTitle.textContent = songTitle;
+        nowPlayingSubtitle.textContent = "正在播放";
+        
+        // 高亮当前选中的歌曲
+        musicEntries.forEach(e => e.style.background = e === this ? '#2a2a2d' : '#1c1c1f');
+        
+        // 自动播放
+        audioPlayer.play().catch(e => console.log("自动播放被阻止:", e));
+      });
+    });
+    
+    // 监听音频播放结束事件
+    audioPlayer.addEventListener('ended', function() {
+      nowPlayingSubtitle.textContent = "播放结束";
+    });
+    
+    // 监听音频播放事件
+    audioPlayer.addEventListener('play', function() {
+      nowPlayingSubtitle.textContent = "正在播放";
+    });
+    
+    // 监听音频暂停事件
+    audioPlayer.addEventListener('pause', function() {
+      nowPlayingSubtitle.textContent = "已暂停";
+    });
+  </script>
 </body>
 </html>
